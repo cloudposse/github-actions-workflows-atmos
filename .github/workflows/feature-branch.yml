@@ -93,8 +93,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  ci:
-    uses: cloudposse/github-actions-workflows/.github/workflows/ci-dockerized-app-build.yml@main
+  stacks:
+    uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-affected-stacks.yml@main
+
+  plan:
+    uses: cloudposse/github-actions-workflows/.github/workflows/ci-atmos-stack-plan.yml@main
+    needs: [ stacks ]
     with:
       organization: ${{ inputs.organization }}
       repository: ${{ inputs.repository }}
@@ -104,9 +108,9 @@ jobs:
       registry: ${{ secrets.registry }}
       secret-outputs-passphrase: ${{ secrets.secret-outputs-passphrase }}
 
-  cd:
-    uses: cloudposse/github-actions-workflows/.github/workflows/cd-preview-argocd.yml@main
-    needs: [ ci ]
+  workflows:
+    uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-github-workflows.yml@main
+    needs: [ stacks ]
     if: ${{ always() }}
     with:
       image: ${{ needs.ci.outputs.image }}

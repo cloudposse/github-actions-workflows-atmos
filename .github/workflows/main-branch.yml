@@ -70,8 +70,12 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  ci:
-    uses: cloudposse/github-actions-workflows/.github/workflows/ci-dockerized-app-build.yml@main
+  stacks:
+    uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-affected-stacks.yml@main
+
+  deploy:
+    uses: cloudposse/github-actions-workflows/.github/workflows/controller-github-trigger-workflow.yml@main
+    needs: [ stacks ]
     with:
       organization: ${{ inputs.organization }}
       repository: ${{ inputs.repository }}
@@ -81,22 +85,3 @@ jobs:
       registry: ${{ secrets.registry }}
       secret-outputs-passphrase: ${{ secrets.secret-outputs-passphrase }}
 
-  cd:
-    uses: cloudposse/github-actions-workflows/.github/workflows/cd-argocd.yml@main
-    needs: [ ci ]
-    with:
-      image: ${{ needs.ci.outputs.image }}
-      tag: ${{ needs.ci.outputs.tag }}
-      repository: ${{ inputs.repository }}
-      organization: ${{ inputs.organization }}
-      environment: dev
-      synchronously: true
-    secrets:
-      secret-outputs-passphrase: ${{ secrets.secret-outputs-passphrase }}
-      github-private-actions-pat: ${{ secrets.github-private-actions-pat }}
-
-  release:
-    uses:  cloudposse/github-actions-workflows/.github/workflows/controller-draft-release.yml@main
-    needs: [ cd ]
-    secrets:
-      github-private-actions-pat: ${{ secrets.github-private-actions-pat }}
