@@ -74,14 +74,21 @@ jobs:
     uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-affected-stacks.yml@main
 
   deploy:
-    uses: cloudposse/github-actions-workflows/.github/workflows/cd-atmos-stack-deploy.yml@main
     needs: [ stacks ]
+    if: ${{ needs.stacks.outputs.has-affected-stacks == 'true' }}
+    strategy:
+      matrix: ${{ fromJson(needs.stacks.outputs.stacks) }}
+    name: deploy draft ${{ matrix.stack_slug }}
+    uses: cloudposse/github-actions-workflows/.github/workflows/cd-atmos-stack-deploy.yml@main
     with:
-      organization: ${{ inputs.organization }}
-      repository: ${{ inputs.repository }}
+      ref: ${{ github.event.pull_request.head.sha }}
+      default-branch: ${{ github.event.repository.default_branch }}
+      stack: ${{ matrix.stack }}
+      component: ${{ matrix.component }}
+      component_path: ${{ matrix.component_path }}
+      environment: ${{ matrix.stack_slug }}-draft
+      stack_slug: ${{ matrix.stack_slug }}
     secrets:
-      ecr-region: ${{ secrets.ecr-region }}
-      ecr-iam-role: ${{ secrets.ecr-iam-role }}
-      registry: ${{ secrets.registry }}
-      secret-outputs-passphrase: ${{ secrets.secret-outputs-passphrase }}
+      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
+
 
