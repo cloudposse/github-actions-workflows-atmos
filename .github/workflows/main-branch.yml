@@ -74,7 +74,7 @@ jobs:
     uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-affected-stacks.yml@main
 
   deploy:
-    uses: cloudposse/github-actions-workflows/.github/workflows/controller-github-trigger-workflow.yml@main
+    uses: cloudposse/github-actions-workflows/.github/workflows/cd-atmos-stack-deploy.yml@main
     needs: [ stacks ]
     with:
       organization: ${{ inputs.organization }}
