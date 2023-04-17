@@ -81,14 +81,14 @@ jobs:
     name: deploy draft ${{ matrix.stack_slug }}
     uses: cloudposse/github-actions-workflows/.github/workflows/cd-atmos-stack-deploy.yml@main
     with:
-      ref: ${{ github.event.pull_request.head.sha }}
-      default-branch: ${{ github.event.repository.default_branch }}
+#      ref: ${{ github.event.pull_request.head.sha }}
+#      default-branch: ${{ github.event.repository.default_branch }}
       stack: ${{ matrix.stack }}
       component: ${{ matrix.component }}
-      component_path: ${{ matrix.component_path }}
-      environment: ${{ matrix.stack_slug }}-draft
-      stack_slug: ${{ matrix.stack_slug }}
-    secrets:
-      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
+#      component_path: ${{ matrix.component_path }}
+#      environment: ${{ matrix.stack_slug }}-draft
+#      stack_slug: ${{ matrix.stack_slug }}
+#    secrets:
+#      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
 
 
