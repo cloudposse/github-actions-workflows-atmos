@@ -88,7 +88,7 @@ jobs:
       stack: ${{ matrix.stack }}
       component: ${{ matrix.component }}
 #      component_path: ${{ matrix.component_path }}
-#      environment: ${{ matrix.stack_slug }}-draft
+      environment: ${{ matrix.stack_slug }}-draft
 #      stack_slug: ${{ matrix.stack_slug }}
 #    secrets:
 #      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
