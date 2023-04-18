@@ -72,10 +72,6 @@ permissions:
   id-token: write
   contents: read
 
-concurrency:
-  group: ${{ inputs.stack_slug }}
-  cancel-in-progress: false
-
 jobs:
   deploy:
     name: deploy draft ${{ matrix.stack_slug }}
