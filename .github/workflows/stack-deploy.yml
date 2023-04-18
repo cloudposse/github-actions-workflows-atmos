@@ -50,6 +50,18 @@ on:
         required: false
         default: ${{ github.event.repository.name }}
         type: string
+      stack:
+        description: The stack name.
+        required: true
+        type: string
+      component:
+        description: The component name.
+        required: true
+        type: string
+      environment:
+        description: Environment.
+        required: true
+        type: string
     secrets:
       github-private-actions-pat:
         description: "Github PAT allow to pull private repos"
