@@ -118,4 +118,4 @@ jobs:
     uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-github-workflows.yml@main
     needs: [ stacks ]
     with:
-      stacks: ${{ fromJson(needs.stacks.outputs.stacks) }}
+      stacks: ${{ needs.stacks.outputs.stacks }}
