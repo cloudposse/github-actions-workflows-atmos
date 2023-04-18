@@ -76,7 +76,7 @@ jobs:
           repo: ${{ inputs.repository }}
           github_token: ${{ secrets.github-private-actions-pat }}
           workflow_file_name: stack-${{ matrix.stack_slug }}.yml
-          ref: ${{ github.sha }}
+          ref: ${{ github.ref }}
           wait_interval: 10
           client_payload: '{}'
           propagate_failure: true
