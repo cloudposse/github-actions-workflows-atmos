@@ -50,36 +50,9 @@ on:
         required: false
         default: ${{ github.event.repository.name }}
         type: string
-      ref:
-        description: "The fully-formed ref of the branch or tag that triggered the workflow run"
-        required: false
-        default: ${{ github.event.pull_request.head.ref }}
-        type: string
-      open:
-        description: "Pull Request open/close state. Set true if opened"
-        required: false
-        type: boolean
-        default: ${{ github.event.pull_request.state == 'open' }}
-      labels:
-        description: "Pull Request labels"
-        required: false
-        default: ${{ toJSON(github.event.pull_request.labels.*.name) }}
-        type: string
     secrets:
-      secret-outputs-passphrase:
-        description: "Passphrase to encrypt/decrypt secret outputs with gpg. For more information [read](https://github.com/cloudposse/github-action-secret-outputs)"
-        required: true
-      registry:
-        description: "ECR ARN"
-        required: true
       github-private-actions-pat:
         description: "Github PAT allow to pull private repos"
-        required: true
-      ecr-region:
-        description: "ECR AWS region"
-        required: true
-      ecr-iam-role:
-        description: "IAM Role ARN provide ECR write/read access"
         required: true
 
 permissions:
@@ -89,7 +62,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: ${{ inputs.stack_slug }}
   cancel-in-progress: false
 
 jobs:
