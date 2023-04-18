@@ -73,7 +73,7 @@ jobs:
   stacks:
     uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-affected-stacks.yml@main
     with:
-      head-ref: HEAD~2
+      head-ref: HEAD~1
 
   deploy:
     needs: [ stacks ]
