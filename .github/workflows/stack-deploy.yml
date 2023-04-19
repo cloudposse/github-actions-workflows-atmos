@@ -82,7 +82,7 @@ jobs:
       stack: ${{ inputs.stack }}
       component: ${{ inputs.component }}
       #      component_path: ${{ matrix.component_path }}
-      environment: ${{ inputs.stack_slug }}
+      environment: ${{ inputs.environment }}
   #   stack_slug: ${{ matrix.stack_slug }}
   #    secrets:
   #      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
