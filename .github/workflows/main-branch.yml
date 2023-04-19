@@ -68,6 +68,7 @@ jobs:
     if: ${{ needs.stacks.outputs.has-affected-stacks == 'true' }}
     strategy:
       matrix: ${{ fromJson(needs.stacks.outputs.stacks) }}
+    name: deploy (${{ matrix.stack_slug }})
     runs-on: ubuntu-latest
     steps:
       - uses: convictional/trigger-workflow-and-wait@v1.6.1
