@@ -102,14 +102,13 @@ jobs:
     if: ${{ needs.stacks.outputs.has-affected-stacks == 'true' }}
     strategy:
       matrix: ${{ fromJson(needs.stacks.outputs.stacks) }}
-    name: plan ${{ matrix.stack_slug }}
+    name: plan (${{ matrix.stack_slug }})
     with:
       #      ref: ${{ github.event.pull_request.head.sha }}
       #      default-branch: ${{ github.event.repository.default_branch }}
       stack: ${{ matrix.stack }}
       component: ${{ matrix.component }}
       #      component_path: ${{ matrix.component_path }}
-      environment: ${{ matrix.stack_slug }}-draft
   #      stack_slug: ${{ matrix.stack_slug }}
   #    secrets:
   #      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
