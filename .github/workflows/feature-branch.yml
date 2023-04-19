@@ -104,14 +104,14 @@ jobs:
       matrix: ${{ fromJson(needs.stacks.outputs.stacks) }}
     name: plan (${{ matrix.stack_slug }})
     with:
-      #      ref: ${{ github.event.pull_request.head.sha }}
-      #      default-branch: ${{ github.event.repository.default_branch }}
+#      ref: ${{ github.event.pull_request.head.sha }}
+#      default-branch: ${{ github.event.repository.default_branch }}
       stack: ${{ matrix.stack }}
       component: ${{ matrix.component }}
-      #      component_path: ${{ matrix.component_path }}
-  #      stack_slug: ${{ matrix.stack_slug }}
-  #    secrets:
-  #      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
+#      component_path: ${{ matrix.component_path }}
+#      stack_slug: ${{ matrix.stack_slug }}
+#    secrets:
+#      environments_github_token: ${{ secrets.DEPLOYMENTS_GITHUB_TOKEN }}
 
   workflows:
     uses: cloudposse/github-actions-workflows/.github/workflows/controller-atmos-github-workflows.yml@main
